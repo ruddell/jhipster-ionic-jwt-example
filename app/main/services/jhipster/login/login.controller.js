@@ -22,7 +22,7 @@ function LoginCtrl ($log, $scope, $rootScope, $window, $state, $timeout, Auth, $
 
   function hideModal () {
     vm.modal.hide();
-    $state.go('main.home');
+    $state.go('main.list');
 
   }
   // $timeout(function () {angular.element('#username').focus();});
@@ -47,7 +47,7 @@ function LoginCtrl ($log, $scope, $rootScope, $window, $state, $timeout, Auth, $
       vm.hideModal();
       if ($state.current.name === 'register' || $state.current.name === 'activate' ||
         $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
-        $state.go('home');
+        $state.go('main.list');
       }
       if ($state.current.name === 'stream-live') {
         $window.location.reload();

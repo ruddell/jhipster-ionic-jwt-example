@@ -19,6 +19,7 @@
 
     <!-- build:css main/styles/app.css -->
     <!-- inject:css -->
+    <link rel="stylesheet" href="main/styles/main.css">
     <!-- endinject -->
     <!-- endbuild -->
   </head>
@@ -37,11 +38,44 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js scripts/app.js -->
     <!-- inject:js -->
+    <script src="main/main.js"></script>
+    <script src="main/services/main-serv.js"></script>
+    <script src="main/services/jhipster/login/login.service.js"></script>
+    <script src="main/services/jhipster/login/login.controller.js"></script>
+    <script src="main/services/jhipster/interceptor/auth-expired.interceptor.js"></script>
+    <script src="main/services/jhipster/interceptor/auth.interceptor.js"></script>
+    <script src="main/services/jhipster/handlers/state.handler.js"></script>
+    <script src="main/services/jhipster/config/http.config.js"></script>
+    <script src="main/services/jhipster/auth/register.service.js"></script>
+    <script src="main/services/jhipster/auth/principal.service.js"></script>
+    <script src="main/services/jhipster/auth/password-reset-init.service.js"></script>
+    <script src="main/services/jhipster/auth/password-reset-finish.service.js"></script>
+    <script src="main/services/jhipster/auth/password.service.js"></script>
+    <script src="main/services/jhipster/auth/has-authority.directive.js"></script>
+    <script src="main/services/jhipster/auth/has-any-authority.directive.js"></script>
+    <script src="main/services/jhipster/auth/auth.service.js"></script>
+    <script src="main/services/jhipster/auth/auth.jwt.service.js"></script>
+    <script src="main/services/jhipster/auth/activate.service.js"></script>
+    <script src="main/services/jhipster/auth/account.service.js"></script>
+    <script src="main/controllers/menu-ctrl.js"></script>
+    <script src="main/controllers/debug-ctrl.js"></script>
+    <script src="main/constants/config-const.js"></script>
+    <script src="app.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
   </body>
