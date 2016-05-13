@@ -2,24 +2,30 @@
 
 angular
   .module('main')
-  .controller('LoginController', LoginController);
+  .controller('LoginCtrl', LoginCtrl);
 
-LoginController.$inject = ['$rootScope', '$window', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+LoginCtrl.$inject = ['$log', '$scope', '$rootScope', '$window', '$state', '$timeout', 'Auth', '$ionicModal'];
 
-function LoginController ($rootScope, $window, $state, $timeout, Auth, $uibModalInstance) {
+function LoginCtrl ($log, $scope, $rootScope, $window, $state, $timeout, Auth, $ionicModal) {
   var vm = this;
 
   vm.authenticationError = false;
-  vm.cancel = cancel;
   vm.credentials = {};
+  vm.cancel = cancel;
   vm.login = login;
-  vm.password = null;
+  vm.hideModal = hideModal;
   vm.register = register;
-  vm.rememberMe = true;
   vm.requestResetPassword = requestResetPassword;
+  vm.password = null;
+  vm.rememberMe = true;
   vm.username = null;
 
-  $timeout(function (){angular.element('#username').focus();});
+  function hideModal () {
+    vm.modal.hide();
+    $state.go('main.home');
+
+  }
+  // $timeout(function () {angular.element('#username').focus();});
 
   function cancel () {
     vm.credentials = {
@@ -28,7 +34,6 @@ function LoginController ($rootScope, $window, $state, $timeout, Auth, $uibModal
       rememberMe: true
     };
     vm.authenticationError = false;
-    $uibModalInstance.dismiss('cancel');
   }
 
   function login (event) {
@@ -39,23 +44,22 @@ function LoginController ($rootScope, $window, $state, $timeout, Auth, $uibModal
       rememberMe: vm.rememberMe
     }).then(function () {
       vm.authenticationError = false;
-      $uibModalInstance.close();
+      vm.hideModal();
       if ($state.current.name === 'register' || $state.current.name === 'activate' ||
         $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
         $state.go('home');
       }
-      if($state.current.name === 'stream-live'){
+      if ($state.current.name === 'stream-live') {
         $window.location.reload();
       }
 
-      $rootScope.$broadcast('authenticationSuccess');
-
-      // previousState was set in the authExpiredInterceptor before being redirected to login modal.
-      // since login is succesful, go to stored previousState and clear previousState
-      if (Auth.getPreviousState()) {
-        var previousState = Auth.getPreviousState();
-        Auth.resetPreviousState();
-        $state.go(previousState.name, previousState.params);
+      // If we're redirected to login, our
+      // previousState is already set in the authExpiredInterceptor. When login succesful go to stored state
+      if ($rootScope.redirected && $rootScope.previousStateName) {
+        $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
+        $rootScope.redirected = false;
+      } else {
+        $rootScope.$broadcast('authenticationSuccess');
       }
     }).catch(function () {
       vm.authenticationError = true;
@@ -63,12 +67,20 @@ function LoginController ($rootScope, $window, $state, $timeout, Auth, $uibModal
   }
 
   function register () {
-    $uibModalInstance.dismiss('cancel');
+    vm.hideModal();
     $state.go('register');
   }
 
   function requestResetPassword () {
-    $uibModalInstance.dismiss('cancel');
+    vm.hideModal();
     $state.go('requestReset');
   }
+
+  $ionicModal.fromTemplateUrl('main/templates/login.html', {
+    scope: $scope
+  }).then(function (modal) {
+    vm.modal = modal;
+    vm.modal.show();
+  });
+
 }
