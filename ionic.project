@@ -1,0 +1,13 @@
+{
+  "name": "jhipster-ionic",
+  "app_id": "",
+  "documentRoot": "app",
+  "watchPatterns": ["app/**/*", "!app/bower_components/**/*"],
+  "proxies": [
+      {
+        "path": "/api",
+        "proxyUrl": "http://localhost:8080/api",
+        "rejectUnauthorized":false
+      }
+    ]
+}
