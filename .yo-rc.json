@@ -1,0 +1,18 @@
+{
+  "generator-m-ionic": {
+    "answers": {
+      "appName": "app",
+      "appId": "com.company.project",
+      "ionicCss": false,
+      "bowerPackages": [],
+      "platforms": [
+        "ios"
+      ],
+      "plugins": [
+        "cordova-plugin-device"
+      ],
+      "appModule": "app",
+      "ecosystems": []
+    }
+  }
+}
