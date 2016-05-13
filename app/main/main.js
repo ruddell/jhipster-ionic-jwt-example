@@ -15,10 +15,32 @@ angular.module('main', [
       url: '/main',
       abstract: true,
       templateUrl: 'main/templates/menu.html',
-      controller: 'MenuCtrl as vm'
+      controller: 'MenuCtrl as vm',
+      resolve: {
+        authorize: ['Auth',
+          function (Auth) {
+            return Auth.authorize();
+          }
+        ]
+      }
+    })
+    .state('main.login', {
+      url: '/login',
+      data: {
+        authorities: []
+      },
+      views: {
+        'pageContent': {
+          // templateUrl: 'main/services/login/login.html',
+          controller: 'LoginCtrl as vm'
+        }
+      }
     })
       .state('main.list', {
         url: '/list',
+        data: {
+          authorities: []
+        },
         views: {
           'pageContent': {
             templateUrl: 'main/templates/list.html',
@@ -28,6 +50,9 @@ angular.module('main', [
       })
       .state('main.listDetail', {
         url: '/list/detail',
+        data: {
+          authorities: []
+        },
         views: {
           'pageContent': {
             templateUrl: 'main/templates/list-detail.html',
@@ -37,6 +62,9 @@ angular.module('main', [
       })
       .state('main.debug', {
         url: '/debug',
+        data: {
+          authorities: []
+        },
         views: {
           'pageContent': {
             templateUrl: 'main/templates/debug.html',
