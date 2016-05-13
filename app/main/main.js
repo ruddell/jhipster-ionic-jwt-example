@@ -15,7 +15,7 @@ angular.module('main', [
       url: '/main',
       abstract: true,
       templateUrl: 'main/templates/menu.html',
-      controller: 'MenuCtrl as menu'
+      controller: 'MenuCtrl as vm'
     })
       .state('main.list', {
         url: '/list',

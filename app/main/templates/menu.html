@@ -30,13 +30,16 @@
     </ion-header-bar>
 
     <!-- menu content -->
-    <ion-content>
+    <ion-content ng-switch="vm.isAuthenticated()">
       <ion-list>
-        <ion-item menu-close ui-sref="main.list">
-          List
+        <ion-item menu-close ui-sref="main.home">
+          Home
         </ion-item>
-        <ion-item menu-close ui-sref="main.debug">
-          Debug
+        <ion-item ng-switch-when="false" menu-close ng-click="vm.login()">
+          Sign In
+        </ion-item>
+        <ion-item ng-switch-when="true" menu-close ng-click="vm.logout()">
+          Log Out
         </ion-item>
       </ion-list>
     </ion-content>

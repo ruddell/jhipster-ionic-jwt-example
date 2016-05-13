@@ -1,7 +1,14 @@
 'use strict';
 angular.module('main')
-.controller('MenuCtrl', function ($log) {
+  .controller('MenuCtrl', function ($log, Auth, $state, Principal, LoginService) {
+    var vm = this;
+    vm.login = LoginService.open;
+    vm.isAuthenticated = Principal.isAuthenticated;
+    vm.logout = logout;
 
-  $log.log('Hello from your Controller: MenuCtrl in module main:. This is your controller:', this);
+    function logout () {
+      Auth.logout();
+      $state.go('main.home');
+    }
 
-});
+  });
