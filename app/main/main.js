@@ -14,30 +14,31 @@ angular.module('main', [
     .state('main', {
       url: '/main',
       abstract: true,
-      templateUrl: 'main/templates/tabs.html'
+      templateUrl: 'main/templates/menu.html',
+      controller: 'MenuCtrl as menu'
     })
       .state('main.list', {
         url: '/list',
         views: {
-          'tab-list': {
+          'pageContent': {
             templateUrl: 'main/templates/list.html',
-            // controller: 'SomeCtrl as ctrl'
+            // controller: '<someCtrl> as ctrl'
           }
         }
       })
       .state('main.listDetail', {
         url: '/list/detail',
         views: {
-          'tab-list': {
+          'pageContent': {
             templateUrl: 'main/templates/list-detail.html',
-            // controller: 'SomeCtrl as ctrl'
+            // controller: '<someCtrl> as ctrl'
           }
         }
       })
       .state('main.debug', {
         url: '/debug',
         views: {
-          'tab-debug': {
+          'pageContent': {
             templateUrl: 'main/templates/debug.html',
             controller: 'DebugCtrl as ctrl'
           }
